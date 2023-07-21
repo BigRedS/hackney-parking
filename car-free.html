@@ -1,0 +1,364 @@
+10008334036
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Begin Screen component://ecommerce/widget/AddressAndZoneIssueScreens.xml#addressAndZoneIssueForm -->
+<!-- Begin Screen component://ecommerce/widget/CommonScreens.xml#main-decorator-lambeth -->
+<!-- Begin Section Widget  -->
+<!-- Begin Template component://ecommerce/webapp/ecommerce/includes/headerHeadLambeth.ftl -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Hackney Parking & Permits</title>
+<link rel="shortcut icon" href="/images/lambeth/images/favicon.ico" type="image/vnd.microsoft.icon" />
+<link  type="text/css" rel="stylesheet"  href="/images/lambeth/css/style.css" />
+
+<script type="text/javascript" src="/images/lambeth/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="/images/lambeth/js/jquery-ui-1.12.1.min.js"></script>
+<script type="text/javascript" src="/images/lambeth/js/bjqs-1.3.js"></script>
+<script type="text/javascript" src="/images/lambeth/js/script.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-SYFL81NR13"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'G-SYFL81NR13');
+	</script>
+</head>
+<!-- End Template component://ecommerce/webapp/ecommerce/includes/headerHeadLambeth.ftl -->
+<!-- Begin Template component://common/webcommon/includes/openhtmlbody.ftl -->
+	<body>
+
+<!-- End Template component://common/webcommon/includes/openhtmlbody.ftl -->
+<div id="main" class="main">
+<div id="header" class="header">
+<!-- Begin Template component://ecommerce/webapp/ecommerce/includes/headerLambeth.ftl -->
+<script type="text/javascript">
+    function displayModalPopup(message) {
+        $('#formDialogMessage').html("<div class='dilogBoxText'>"+message+"</div>");
+        $("#formDialogMessage").dialog({
+            minHeight: 120,
+            minWidth: 400,
+            draggable: false,
+            closeOnEscape: true,
+            close: function( event, ui ) {$("#overlay").hide();}
+         });    
+         showOverLay();
+         return false; 
+    }
+
+    function displayConfirmPopup(message,Id) {
+        var result="";
+        $('#formDialogMessage').html("<div class='dilogBoxText'>"+message+"</div>");
+        $("#formDialogMessage").dialog({
+            minHeight: 120,
+            minWidth: 400,
+            draggable: false,
+            closeOnEscape: true,
+            close: function( event, ui ) {$("#overlay").hide();},
+             buttons: [ { text: "Yes", click: function() { 
+                          document.getElementById(Id).submit();
+                          $( this ).dialog( "close" );result= true;
+                       } },
+                {
+                 text: "No", click: function() {
+                    $( this ).dialog( "close" ); result= false;} },
+            ]
+            
+         });    
+         showOverLay();
+         return result; 
+    }
+
+    function showOverLay() {
+        var docHeight = $(document).height();
+    
+        $("body").append("<div id='overlay'></div>");
+        $("div.ui-dialog-buttonpane").removeClass("ui-widget-content");
+        var buttons = $(".ui-button-text-only");
+        buttons.children("span").show();
+        $("#overlay").height(docHeight).css({
+            'display':'block','opacity' : 0.4,'position': 'absolute','top': 0,'left': 0,'background-color': 'black','width': '100%','z-index': 50
+        }).click(function(){
+            $("#formDialogMessage").dialog("close");
+            $("#formDialogSucess").dialog("close");
+        });
+    }
+
+    function validateFormFields(str, id, field) {
+        if (str == null || str == '' || str == undefined) {
+            $('#'+id).css({"border": "1px solid red"});
+            if (errorMsg.length > 0) {
+                errorMsg += ", "+field;
+            } else {
+                errorMsg = field;
+            }
+        }
+    }
+
+    function validateCheckBox(id, field) {
+        if (!$("#"+id).is(":checked")) {
+            $('#'+id).css({"border": "1px solid red"});
+            if (errorMsg.length > 0) {
+                errorMsg += ", "+field;
+            } else {
+                errorMsg = field;
+            }
+        }
+    }
+
+    function checkAgeMinimum17YearsOld(dateOne, missingField) {
+        var oldDate = new Date();
+        oldDate.setFullYear(oldDate.getFullYear() - 16);
+        if (dateOne > oldDate) {
+            if(missingField !=""){
+                missingField=missingField+", Applicants must be over 16 years of age";
+            }
+            else{
+                missingField="Applicants must be over 16 years of age";
+            }   
+        }
+        return missingField;
+    }
+
+</script>
+
+
+<div id="formDialog" title="Error" style="display:none"></div>
+<div id="formDialogSucess" title="Success" style="display:none"></div>
+<div id="formDialogMessage" title="Message" style="display:none"></div>
+<div id="formDialogTimeOutSession" title="Session expired" style="display:none"></div>
+<div id="formDialogAdvisoryMessage" title="Advisory message" style="display:none"></div>
+
+    <div class="login"> <a href="/control/loginHackney" >Log In</a> to your Hackney parking account</div>
+<a href="/control/mainHackney" > <div class="logo clear"><img src="/images/lambeth/images/u6_normal.png" alt="" width="100%" /></div> </a>
+<div id="menu">
+    <a class="menu-icon" onclick="var tgFilter = this, sbFirst = jQuery('.nav').toggle(400, function() {tgFilter.innerHTML = sbFirst.is(':visible') ? 'Hide Menu' : 'Show Menu'}); return false;" >Hide Menu</a>
+    <ul class="nav clear">
+        <li><a href="/control/mainHackney" title="home" class="home">Home</a></li>
+    </ul>
+</div>	
+<!-- End Template component://ecommerce/webapp/ecommerce/includes/headerLambeth.ftl -->
+</div><!-- Begin Template component://common/webcommon/includes/messages.ftl -->
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+<!-- End Template component://common/webcommon/includes/messages.ftl -->
+<div id="left-section" class="left-section">
+</div><div id="customers" class="customers span100per">
+<!-- Begin Template component://lambeth/webapp/lambeth/includes/LoadJs.ftl -->
+            <script type="text/javascript" src="/hackney/images/js/addressAndZoneIssue.js"></script>
+            <script type="text/javascript" src="/images/lambeth/js/ProperCase.js"></script>
+            <script type="text/javascript" src="/images/lambeth/js/lambeth.js"></script>
+<!-- End Template component://lambeth/webapp/lambeth/includes/LoadJs.ftl -->
+<!-- Begin Template component://ecommerce/webapp/ecommerce/addressandzoneissue/addressAndZoneIssueForm.ftl -->
+
+
+
+
+
+
+
+<script>
+    $(function(){
+        var addressType = "s106";
+        if(addressType == "s106"){
+            $("#s106Div").show();
+        }else if(addressType == "cpz"){
+            $("#wrongAddressDiv").show();
+        }else if(addressType == "addressNotResidential"){
+        	$("#notResDiv").show();
+        }else{
+            $("#noSuchAddressDiv").show();
+        }
+
+        
+    });
+</script>
+
+<div class="breadcrumbs">
+    <a href="/control/mainHackney">Home</a>
+    &nbsp; > &nbsp;
+    <a href="/control/mainHackney"> Parking, Transport and Streets</a>
+    &nbsp; > &nbsp; Address and zone issue details
+</div> 
+
+<div class="">
+    <div class="">
+        <div class="text-21 hint-line span100per clear">
+            <div class="div-left clear-l"><span class="yellow-c one clear-l">1</span> <span class="span-text">Chose permit type</span></div>
+            <div class="div-left second clear-l"><span class="yellow-c clear-l">2</span> <span class="span-text">Address and zone issue details</span></div>
+            <div class="mandatory">* mandatory field</div>
+        </div>
+        <form name="addressForm" id="addressForm" method="POST" action="/control/addressAndZoneIssue" class="mrg-t30" enctype="multipart/form-data">
+            <input type="hidden" name="" value=""/>
+            <div class="span50 div-left clear cnt-mrg">
+                <div class="label div-left mrg-t10 span200"><strong>Error Type*</strong></div>
+                <select name="errTypeId" class ="colour" value="Select Error type" id="errTypeId" >
+                            <option value="S106_ADDRESS" selected>The address is listed as car free</option>
+                </select>
+            </div>
+            <div class="informational mrg-t15" id="noSuchAddressDiv" style="display:none">
+                <div class="warning">
+                    We don't have a record of this address being in a parking zone in Hackney. 
+					If you think our records are incorrect, please complete the form below, providing as much information as possible. 
+					We will respond within 2 working days, and email you a receipt of the information you provide.                
+				</div>
+            </div>
+            <div class="informational mrg-t15" id="s106Div" style="display:none">
+                <div class="warning">
+                    Our records show that your address is in a building that is subject to a car free restriction set out in a 
+					planning legal agreement (blue badge holders are exempt from this restriction).  
+					Landlords or property sellers have to provide this information to tenants or buyers.   
+					You are however entitled to buy visitor vouchers. If you believe that our records are incorrect, 
+					please complete the form below and we will respond to you within 2 working days. You will also receive a receipt of the information that you provide.
+                </div>
+            </div>
+            <div class="informational mrg-t15" id="wrongAddressDiv" style="display:none">
+                <div class="warning">
+                    If you believe that our records are incorrect, please provide as much of the following information as possible. 
+					We will respond within 2 working days and email you a receipt of the information you provide.
+                </div>
+            </div>
+            <div class="informational mrg-t15" id="notResDiv" style="display:none">
+                <div class="warning">
+                    If you believe that our records are incorrect, please provide as much of the following information as possible. 
+					We will respond within 2 working days and email you a receipt of the information you provide.
+                </div>
+            </div>
+            <div class="mrg-t30" style="float:left;">
+                <h2>Your Details</h2>
+                    <div class="span50 div-left clear cnt-mrg">
+                        <div class="label div-left mrg-t10 span200"><strong>Title*</strong></div>
+                        <div class="text_box">
+                            <select id="USER_TITLE" name="title">
+                                <option value="">Select Title</option>
+<option value="Mr">Mr</option>
+<option value="Mrs">Mrs</option>
+<option value="Ms">Ms</option>
+<option value="Dr">Dr</option>
+<option value="Mx">Mx</option>                            </select>
+                            <em class="clear" id="USER_TITLE_MSG" style="color:red"></em>
+                        </div>
+                    </div>
+                     <div class="span50 div-left clear cnt-mrg">
+                        <div class="label div-left mrg-t10 span200"><strong>First name*</strong></div>
+                        <div class="text_box"><input type="text" name="firstName" id="firstName" value="" onBlur="javascript:PCase('firstName',0);" /></div>
+                    </div>
+                
+                    <div class="span50 div-left clear cnt-mrg">
+                        <div class="label div-left mrg-t10 span200"><strong>Surname*</strong></div>
+                        <input type="text" name="lastName" id="lastName" value="" onBlur="javascript:PCase('lastName',0);">
+                    </div>
+                    <div class="span50 div-left clear cnt-mrg">
+                        <div class="label div-left mrg-t10 span200"><strong>Email address*</strong></div>
+                        <input type="text" name="CUSTOMER_EMAIL" id="CUSTOMER_EMAIL" value=""  onChange="javascript:validateEmail('CUSTOMER_EMAIL');" />
+                    </div>
+                    <div class="span50 div-left clear cnt-mrg">
+                        <div class="label div-left mrg-t10 span200"><strong>Phone number*</strong></div>
+                        <input type="text" name="telecomNumber" id="telecomNumber" value=""  maxlength="20" />
+                    </div>
+                    <input type="hidden" name="isExistingCutomer" id="isExistingCutomer" value="N"/>
+            </div>  
+            <div class="mrg-t30" style="float:right;">
+                <h2>Your address</h2>
+                <div class="span50 div-left clear cnt-mrg">
+                    <div class="label div-left mrg-t10 span200"><strong>Address Line 1*</strong></div>
+                    <div class="text_box"><input type="text" name="address1" id="address1" value="" onBlur="javascript:PCase('address1',0);" /></div>
+                </div>
+            
+                <div class="span50 div-left clear cnt-mrg">
+                    <div class="label div-left mrg-t10 span200"><strong>Address Line 2</strong></div>
+                    <div class="text_box"><input type="text" name="address2" id="address2" value="" onBlur="javascript:PCase('address2',0);" /></div>
+                </div>
+                
+                <div class="span50 div-left clear cnt-mrg">
+                    <div class="label div-left mrg-t10 span200"><strong>Address Line 3</strong></div>
+                    <div class="text_box"><input type="text" name="address3" id="address3" value="" onBlur="javascript:PCase('address3',0);" /></div>
+                </div>
+                <div class="span50 div-left clear cnt-mrg">
+                    <div class="label div-left mrg-t10 span200"><strong>Address Line 4</strong></div>
+                    <div class="text_box"><input type="text" name="address4" id="address4" value="" onBlur="javascript:PCase('address4',0);" /></div>
+                </div>
+                <div class="span50 div-left clear cnt-mrg">
+                    <div class="label div-left mrg-t10 span200"><strong>Postcode*</strong></div>
+                    <div class="text_box"><input type="text" name="POSTCODE" id="POSTCODE" value="N1+7GH" /></div>
+                </div>
+            </div>
+            
+            <div class="clear div-left" style='margin-bottom: 45px;'>
+                <div class="span50 div-left clear cnt-mrg" >
+                    <div class="label div-left mrg-t10 span200">
+                        <strong>
+                            Supporting Information - please provide a brief outline of when you moved into the property,
+                            if it is a new building , and whether you have previously had a permit for this address
+                            (including the permit number if you have it).
+                        </strong>
+                    </div>
+                    <div class="text_box"><textarea type="textarea" id="supportingInformation" name="supportingInformation" value="" style="width: 273px; height: 134px;"></textarea></div>
+                </div>
+                
+                <div class="span50 div-left clear cnt-mrg" >
+                    <div class="label div-left mrg-t10 span200">
+                        <strong>Please upload relevant supporting documents.</strong>
+                    </div>
+                    <div class="text_box" >
+                        <div class="text_box"  id='uploadPhotos'><input type="file" id="businessPhotograph0" class='businessPhotograph' name='businessPhotograph'></div>
+                        <div class="label">
+                            <div class="text_box"><a href="javascript:void(0);" id="moreUploads" >More</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="cpzCode" id="cpzCode" value=""/>
+            <input type="hidden" name="ccZone" id="ccZone" value="" />
+           <!-- <input type="hidden" name="uprn" id="uprn" value="10008334036" /> -->
+            <input type="hidden" name="product_id" id="product_id" value="RESIDENT" />
+            
+            <input type="hidden" name="productIdVal" id="productIdVal" value="RESIDENT" />
+            
+            <input type="hidden" name="salesChannelEnumId" value="WEB_SALES_CHANNEL" />
+            <div class="loginDiv clear  span600  mrg-t15">
+                <a class="loginBtn" href="javascript:proceedNext();" id="submitAddressIssue">Proceed</a>
+                <a class="loginBtn" href="/control/permitsHackneyClear">Cancel</a>
+            </div>
+            <input type="hidden" name="" value=""/>
+
+        </form> 
+    </div>
+</div>
+<!-- End Template component://ecommerce/webapp/ecommerce/addressandzoneissue/addressAndZoneIssueForm.ftl -->
+</div><div id="right-section" class="right-section">
+</div><div id="right-section" class="right-section landing">
+</div><div id="container" class="container">
+</div></div><div id="footer" class="footer-body">
+<!-- Begin Template component://ecommerce/webapp/ecommerce/includes/footerLambeth.ftl -->
+
+
+		<div class="footer">
+			<div class="text-center mrg-t10"><a href="https://hackney.gov.uk/parking-products-privacy" target="_blank" title="Find out about your Data Protection rights">Privacy Notice</a></div>
+		 </div> 
+<!-- End Template component://ecommerce/webapp/ecommerce/includes/footerLambeth.ftl -->
+</div><!-- Begin Template component://common/webcommon/includes/closehtmlbody.ftl -->
+</body>
+</html>
+<!-- End Template component://common/webcommon/includes/closehtmlbody.ftl -->
+<!-- End Section Widget  -->
+<!-- End Screen component://ecommerce/widget/CommonScreens.xml#main-decorator-lambeth -->
+<!-- End Screen component://ecommerce/widget/AddressAndZoneIssueScreens.xml#addressAndZoneIssueForm -->
+
+result: error

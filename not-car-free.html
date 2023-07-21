@@ -1,0 +1,718 @@
+10008312004
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Begin Screen component://ecommerce/widget/CommonScreens.xml#resPermStage3 -->
+<!-- Begin Screen component://ecommerce/widget/CommonScreens.xml#main-decorator-lambeth -->
+<!-- Begin Section Widget  -->
+<!-- Begin Template component://ecommerce/webapp/ecommerce/includes/headerHeadLambeth.ftl -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Hackney Parking & Permits</title>
+<link rel="shortcut icon" href="/images/lambeth/images/favicon.ico" type="image/vnd.microsoft.icon" />
+<link  type="text/css" rel="stylesheet"  href="/images/lambeth/css/style.css" />
+
+<script type="text/javascript" src="/images/lambeth/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="/images/lambeth/js/jquery-ui-1.12.1.min.js"></script>
+<script type="text/javascript" src="/images/lambeth/js/bjqs-1.3.js"></script>
+<script type="text/javascript" src="/images/lambeth/js/script.js"></script>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-SYFL81NR13"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'G-SYFL81NR13');
+	</script>
+</head>
+<!-- End Template component://ecommerce/webapp/ecommerce/includes/headerHeadLambeth.ftl -->
+<!-- Begin Template component://common/webcommon/includes/openhtmlbody.ftl -->
+	<body>
+
+<!-- End Template component://common/webcommon/includes/openhtmlbody.ftl -->
+<div id="main" class="main">
+<div id="header" class="header">
+<!-- Begin Template component://ecommerce/webapp/ecommerce/includes/headerLambeth.ftl -->
+<script type="text/javascript">
+    function displayModalPopup(message) {
+        $('#formDialogMessage').html("<div class='dilogBoxText'>"+message+"</div>");
+        $("#formDialogMessage").dialog({
+            minHeight: 120,
+            minWidth: 400,
+            draggable: false,
+            closeOnEscape: true,
+            close: function( event, ui ) {$("#overlay").hide();}
+         });    
+         showOverLay();
+         return false; 
+    }
+
+    function displayConfirmPopup(message,Id) {
+        var result="";
+        $('#formDialogMessage').html("<div class='dilogBoxText'>"+message+"</div>");
+        $("#formDialogMessage").dialog({
+            minHeight: 120,
+            minWidth: 400,
+            draggable: false,
+            closeOnEscape: true,
+            close: function( event, ui ) {$("#overlay").hide();},
+             buttons: [ { text: "Yes", click: function() { 
+                          document.getElementById(Id).submit();
+                          $( this ).dialog( "close" );result= true;
+                       } },
+                {
+                 text: "No", click: function() {
+                    $( this ).dialog( "close" ); result= false;} },
+            ]
+            
+         });    
+         showOverLay();
+         return result; 
+    }
+
+    function showOverLay() {
+        var docHeight = $(document).height();
+    
+        $("body").append("<div id='overlay'></div>");
+        $("div.ui-dialog-buttonpane").removeClass("ui-widget-content");
+        var buttons = $(".ui-button-text-only");
+        buttons.children("span").show();
+        $("#overlay").height(docHeight).css({
+            'display':'block','opacity' : 0.4,'position': 'absolute','top': 0,'left': 0,'background-color': 'black','width': '100%','z-index': 50
+        }).click(function(){
+            $("#formDialogMessage").dialog("close");
+            $("#formDialogSucess").dialog("close");
+        });
+    }
+
+    function validateFormFields(str, id, field) {
+        if (str == null || str == '' || str == undefined) {
+            $('#'+id).css({"border": "1px solid red"});
+            if (errorMsg.length > 0) {
+                errorMsg += ", "+field;
+            } else {
+                errorMsg = field;
+            }
+        }
+    }
+
+    function validateCheckBox(id, field) {
+        if (!$("#"+id).is(":checked")) {
+            $('#'+id).css({"border": "1px solid red"});
+            if (errorMsg.length > 0) {
+                errorMsg += ", "+field;
+            } else {
+                errorMsg = field;
+            }
+        }
+    }
+
+    function checkAgeMinimum17YearsOld(dateOne, missingField) {
+        var oldDate = new Date();
+        oldDate.setFullYear(oldDate.getFullYear() - 16);
+        if (dateOne > oldDate) {
+            if(missingField !=""){
+                missingField=missingField+", Applicants must be over 16 years of age";
+            }
+            else{
+                missingField="Applicants must be over 16 years of age";
+            }   
+        }
+        return missingField;
+    }
+
+</script>
+
+
+<div id="formDialog" title="Error" style="display:none"></div>
+<div id="formDialogSucess" title="Success" style="display:none"></div>
+<div id="formDialogMessage" title="Message" style="display:none"></div>
+<div id="formDialogTimeOutSession" title="Session expired" style="display:none"></div>
+<div id="formDialogAdvisoryMessage" title="Advisory message" style="display:none"></div>
+
+    <div class="login"> <a href="/control/loginHackney" >Log In</a> to your Hackney parking account</div>
+<a href="/control/mainHackney" > <div class="logo clear"><img src="/images/lambeth/images/u6_normal.png" alt="" width="100%" /></div> </a>
+<div id="menu">
+    <a class="menu-icon" onclick="var tgFilter = this, sbFirst = jQuery('.nav').toggle(400, function() {tgFilter.innerHTML = sbFirst.is(':visible') ? 'Hide Menu' : 'Show Menu'}); return false;" >Hide Menu</a>
+    <ul class="nav clear">
+        <li><a href="/control/mainHackney" title="home" class="home">Home</a></li>
+    </ul>
+</div>	
+<!-- End Template component://ecommerce/webapp/ecommerce/includes/headerLambeth.ftl -->
+</div><!-- Begin Template component://common/webcommon/includes/messages.ftl -->
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+<!-- End Template component://common/webcommon/includes/messages.ftl -->
+<div id="left-section" class="left-section">
+<!-- Begin Template component://lambeth/webapp/lambeth/includes/LoadJs.ftl -->
+<!-- End Template component://lambeth/webapp/lambeth/includes/LoadJs.ftl -->
+<!-- Begin Template component://ecommerce/webapp/ecommerce/lambeth/resident/resPermitStage3.ftl -->
+<script language="javascript" type="text/javascript" src="/images/lambeth/js/lambeth.js"></script>
+<script language="javascript" type="text/javascript" src="/images/lambeth/js/ProperCase.js"></script>
+	
+	
+    
+<script type="text/javascript">
+
+$(function(){
+
+	
+      
+	$( "#BLUE_BADGE_EXPIRY_PICKER" ).datepicker({ yearRange: "-0:+5", changeMonth: true, changeYear: true, dateFormat: 'dd/mm/yy',
+		onSelect: function(date){ 		
+			var datenew=$("#BLUE_BADGE_EXPIRY_PICKER").datepicker({dateFormat:'yyyy-mm-dd'}).val();
+			var Day=datenew.substring(0,2);
+			var month=datenew.substring(3,5);
+			var year=datenew.substring(6,datenew.length);  
+			$('#BLUE_BADGE_EXPIRY').val(year+"-"+month+"-"+Day);
+	    }
+	});
+	$( "#USER_BIRTHDATE_PICKER" ).datepicker({ changeMonth: true, changeYear: true, yearRange: "-100:+0", dateFormat: 'dd/mm/yy',
+		onSelect: function(date){ 		
+			var datenew=$("#USER_BIRTHDATE_PICKER").datepicker({dateFormat:'yyyy-mm-dd'}).val();
+			var Day=datenew.substring(0,2);
+			var month=datenew.substring(3,5);
+			var year=datenew.substring(6,datenew.length);
+			$('#USER_BIRTHDATE').val(year+"-"+month+"-"+Day);
+	    }
+	});
+	
+	
+	$("#minorDetails").hide();
+	
+  $( "#MINOR_BIRTHDATE_PICKER" ).datepicker({ changeMonth: true, changeYear: true, yearRange: "-100:+0", dateFormat: 'dd/mm/yy',
+		onSelect: function(date){ 		
+			var datenew=$("#MINOR_BIRTHDATE_PICKER").datepicker({dateFormat:'yyyy-mm-dd'}).val();
+			var Day=datenew.substring(0,2);
+			var month=datenew.substring(3,5);
+			var year=datenew.substring(6,datenew.length);
+			$('#USER_BIRTHDATE').val(year+"-"+month+"-"+Day);
+	    }
+	});
+
+	
+  $('input[type=radio][name=applicantType]').change(function() {
+	    if (this.value == 'self') {
+	        $("#minorDetails").hide();
+	    }
+	    else {
+	        $("#minorDetails").show();
+	    }
+	});
+	
+	$('#cfrmDetails').click(function(){
+		var CheckValue=true; 
+		if(CheckValue == true){
+			if (validate()) {
+                	$('#ajaxloaderContinue').show();
+                	$('#personalForm').submit();
+        	}
+		}
+	});
+	
+	$('#manual_phoneNumber, #manual_phoneNumberForm_personal').keydown(function(event){
+	  	if((event.which >= 48 && event.which <= 57) || (event.which >= 96 && event.which <= 105) || (event.which == 8) || (event.which == 9) || (event.which == 46))
+	    {
+	        return true;
+	    } else{
+	        return false;
+	    }
+	});
+    $('#CUSTOMER_HOME_CONTACT, #CUSTOMER_MOBILE_CONTACT').keydown(function(event){
+    if((event.which >= 48 && event.which <= 57) || (event.which >= 96 && event.which <= 105) || (event.which == 8)|| (event.which == 9) || (event.which == 46)){
+            return true;
+        }else{
+            return false;
+        }
+    });
+	
+		$('#bluBadgeNumber').hide(0);
+		$('#bluBadgeExpiry').hide(0);
+		$('#bluBadge').click(function() {
+			if ($('#bluBadge').is(':checked')) {
+				$('#bluBadgeNumber').show();
+				$('#bluBadgeExpiry').show();
+			} else {
+				$('#bluBadgeNumber').hide();
+				$('#bluBadgeExpiry').hide();
+			}
+		});
+	
+	$('#USER_TITLE').val('')
+	
+	
+
+});
+
+function validate() {
+	
+	var missingField="";
+	var missingField="";
+	 	$('input, select').css({"border": ""});
+	if($('#USER_TITLE').val() == ''){
+		missingField="Title";
+		$('#USER_TITLE').css({"border": "1px solid red"});
+		CheckValue=false;
+	}
+	if($('#USER_FIRST_NAME').val() == ''){
+		if(missingField !=""){
+			missingField=missingField+",First Name";
+		}
+		else{
+			missingField="First Name";
+		}
+		$('#USER_FIRST_NAME').css({"border": "1px solid red"});
+		CheckValue=false;
+	}
+	if($('#USER_LAST_NAME').val() == ''){
+		if(missingField !=""){
+			missingField=missingField+",Last Name";
+		}
+		else{
+			missingField="Last Name";
+		}
+		$('#USER_LAST_NAME').css({"border": "1px solid red"});
+		CheckValue=false;
+	}
+	if($('#USER_BIRTHDATE_PICKER').val() == ''){
+		
+		if(missingField !=""){
+			missingField=missingField+",Date of birth";
+		}
+		else{
+			missingField="Date of birth";
+		}
+		$('#USER_BIRTHDATE_PICKER').css({"border": "1px solid red"});
+		CheckValue=false;
+		} 
+	else {
+		CheckValue=true;
+		var datenew=$("#USER_BIRTHDATE_PICKER").val();
+		if(datenew == '' || datenew.length !=10) {
+			CheckValue=false;
+			missingField="Proper Date of Birth (dd/mm/yyyy)";
+		}
+		var day=datenew.substring(0,2);
+		var month=datenew.substring(3,5);
+		var year=datenew.substring(6,datenew.length);
+		
+		if(year == '' || isNaN(year)) {
+		  year = 0;
+		}
+		if(month == '' || isNaN(month)) {
+		  month = 0;
+		}
+		
+		if(day == '' || isNaN(day) || parseInt(day) == 0 || parseInt(day) > 31){
+			CheckValue=false;
+			missingField="Proper Date of Birth (dd/mm/yyyy)";
+		}
+		if(parseInt(month) == 0 || parseInt(month) > 12) {
+			CheckValue=false;
+			missingField="Proper Date of Birth (dd/mm/yyyy)";
+		} 
+		var curDate = new Date();
+		var dateOne = new Date(parseInt(year), (parseInt(month)-1), parseInt(day)); //Year, Month, Date
+		
+		if(year.length != 4){
+			CheckValue=false;
+			missingField="Proper Date of Birth (dd/mm/yyyy)";
+		}
+		
+		if(dateOne > curDate) {
+			CheckValue=false;
+			missingField="Proper Date of Birth (dd/mm/yyyy), DOB can't be after current date";
+			$('#USER_BIRTHDATE_PICKER').css({"border": "1px solid red"});
+		}
+		
+        missingField = checkAgeMinimum17YearsOld(dateOne, missingField);
+		
+		var dob=year+"-"+month+"-"+day;
+			$('#USER_BIRTHDATE').val(dob);
+		
+	}
+
+	if ($("#bluBadge").is(":checked")) {
+		if ($('#BLUE_BADGE_NUMBER').val() == "") {
+			if(missingField !=""){
+				missingField=missingField+",Blue Badge Number";
+			}
+			else{
+				missingField="Blue Badge Number";
+			}
+			
+			$('#BLUE_BADGE_NUMBER').css({"border": "1px solid red"});
+		}	
+		if ($('#BLUE_BADGE_EXPIRY_PICKER').val() == "") {
+			if(missingField !=""){
+				missingField=missingField+",Blue Badge Expiry";
+			}
+			else{
+				missingField="Blue Badge Expiry";
+			}
+			$('#BLUE_BADGE_EXPIRY_PICKER').css({"border": "1px solid red"});
+		} else {
+		
+		    CheckValue=true;
+            var datenew=$("#BLUE_BADGE_EXPIRY_PICKER").val();
+            if(datenew == '' || datenew.length !=10) {
+                CheckValue=false;
+                missingField="Proper Blue Badge Expiry Date (dd/mm/yyyy)";
+            }
+            var day=datenew.substring(0,2);
+            var month=datenew.substring(3,5);
+            var year=datenew.substring(6,datenew.length);
+            
+            if(year == '' || isNaN(year)) {
+              year = 0;
+            }
+            if(month == '' || isNaN(month)) {
+              month = 0;
+            }
+            
+            if(day == '' || isNaN(day) || parseInt(day) == 0 || parseInt(day) > 31){
+                CheckValue=false;
+                missingField="Proper Blue Badge Expiry Date (dd/mm/yyyy)";
+            }
+            if(parseInt(month) == 0 || parseInt(month) > 12) {
+                CheckValue=false;
+                missingField="Proper Blue Badge Expiry Date (dd/mm/yyyy)";
+            } 
+            var curDate = new Date();
+            curDate.setHours(0,0,0,0);
+            var dateOne = new Date(parseInt(year), (parseInt(month)-1), parseInt(day)); //Year, Month, Date
+            
+            if(year.length != 4){
+                CheckValue=false;
+                missingField="Proper Blue Badge Expiry Date (dd/mm/yyyy)";
+            }
+            
+            if(dateOne < curDate) {
+                CheckValue=false;
+                missingField="Proper Blue Badge Expiry Date (dd/mm/yyyy), expiry can't be before tomorrow";
+            }
+            var dob=year+"-"+month+"-"+day;
+				$('#BLUE_BADGE_EXPIRY').val(dob);
+		}
+
+	} else {
+		$('#BLUE_BADGE_NUMBER').val(null);
+		$('#BLUE_BADGE_EXPIRY').val(null);
+	}
+	//don't validate email/password if user is already logged in
+	// Validate password / email 
+	if($('#CUSTOMER_EMAIL').val()== '') {
+		if(missingField !=""){
+			missingField=missingField+", Email Address";
+		}
+		else{
+			missingField="Email Address";
+		}
+		$('#CUSTOMER_EMAIL').css({"border": "1px solid red"});
+	} else {
+		$('#USERNAME').val($('#CUSTOMER_EMAIL').val());
+	}if($('#CUSTOMER_EMAIL_REPEAT').val()== '') {
+		if(missingField !=""){
+			missingField=missingField+", Confirm Email Address";
+		}
+		else{
+			missingField="Confirm Email Address";
+		}
+		$('#CUSTOMER_EMAIL_REPEAT').css({"border": "1px solid red"});
+	} else if ($('#CUSTOMER_EMAIL').val() != $('#CUSTOMER_EMAIL_REPEAT').val()) {
+		if(missingField !=""){
+			missingField=missingField+", Email Addresses that match";
+		}
+		else{
+			missingField="Email Addresses that match";
+		}	
+	}
+	
+	if($('#CUSTOMER_EMAIL').val()!= '') {
+		var customerEmail= $.trim($('#CUSTOMER_EMAIL').val());
+		var confirmEmail = $.trim($('#CUSTOMER_EMAIL_REPEAT').val());
+		
+		if(!validateEmail(customerEmail)){
+           missingField="a valid email address ";
+           $('#CUSTOMER_EMAIL').css({"border": "1px solid red"});
+         }
+
+         $('#CUSTOMER_EMAIL').val(customerEmail);
+         $('#CUSTOMER_EMAIL_REPEAT').val(confirmEmail);
+	}	
+	
+	if($('#CUSTOMER_HOME_CONTACT').val()== '') {
+		if(missingField !=""){
+			missingField=missingField+", Main contact number";
+		}
+		else{
+			missingField="Main contact number";
+		}
+		$('#CUSTOMER_HOME_CONTACT').css({"border": "1px solid red"});
+	}
+	
+   if($('#PASSWORD').val() != ''){
+     var password=$('#PASSWORD').val();
+	
+       if(password && password.length < 8){
+         displayModalPopup("Password is invalid please enter a password that is at least 8 characters and uses at least one number");
+          $('#PASSWORD').css({"border": "1px solid red"});
+         return false;
+         
+          
+     }
+   } 
+
+   if($('#PASSWORD').val() != ''){
+
+     if(password && password.length >= 8){
+     
+       if(password.search(/\d/) == -1){
+         
+         
+         displayModalPopup("Password is invalid please enter a password that is uses at least one number");
+         $('#PASSWORD').css({"border": "1px solid red"});
+         return false;
+       
+    
+    }
+   } 
+
+  }
+	
+	if($('#PASSWORD').val()== '') {
+		if(missingField !=""){
+			missingField=missingField+", Password";
+		}
+		else{
+			missingField="Password";
+		}
+		$('#PASSWORD').css({"border": "1px solid red"});
+	}if($('#CONFIRM_PASSWORD').val()== '') {
+		if(missingField !=""){
+			missingField=missingField+", Confirm Password";
+		}
+		else{
+			missingField="Confirm Password";
+		}
+		$('#CONFIRM_PASSWORD').css({"border": "1px solid red"});
+	} else if ($('#PASSWORD').val() != $('#CONFIRM_PASSWORD').val()) {
+		if(missingField !=""){
+			missingField=missingField+", Passwords that match";
+		}
+		else{
+			missingField="Passwords that match";
+		}	
+	}
+
+	
+	
+	
+	
+	
+	//PER-858
+	if(missingField!=""){
+		displayModalPopup("Please provide "+missingField);
+		return false;
+	}else{
+		return true;
+	}
+}
+function isBadgeNumberDuplicateAjax() {
+	var def = $.Deferred();
+	var isBadgeNumberDuplicateData = {badgeNumber : $('#BLUE_BADGE_NUMBER').val()};
+	$.when($.ajax({
+		type: "post",
+	    url: "isBadgeNumberDuplicate",
+	    data: isBadgeNumberDuplicateData,
+	    dataType: "json"
+	})).done(function(result) {
+		if(result._ERROR_MESSAGE_LIST_ != undefined){
+			displayModalPopup("Blue badge service error");
+			def.resolve(false);
+		}else if(result.isDuplicate){
+			missingField = "unique blue badge number";
+			displayModalPopup("Please provide "+missingField);
+			def.resolve(false);
+		}else{
+			def.resolve(true);
+		}
+	}).fail(function(error){
+		displayModalPopup("Blue badge service error");
+		def.resolve(false);
+	});
+	return def.promise();
+}
+  function blockSpecialChar(e) {
+    var k;
+    document.all ? k = e.keyCode : k = e.which;
+    return ((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8   || (k >= 48 && k <= 57));
+    } 
+
+</script>
+<div class="breadcrumbs">
+    <a href="/control/mainHackney">Home</a>
+    &nbsp; > &nbsp;
+    <a href="/control/mainHackney"> Parking, Transport and Streets</a>
+    &nbsp; > &nbsp; Apply for a new permit
+</div> 
+
+
+<div class="sec-5">
+	<div class="text-21 hint-line span100per clear">
+		<div class="div-left clear-l"><span class="yellow-c one clear-l">1</span> <span class="span-text">Chose permit type</span></div>
+		<div class="div-left second clear-l"><span class="yellow-c clear-l">2</span> <span class="span-text">Resident permit details</span></div>
+		<div class="mandatory">* mandatory field</div>
+	</div>
+	<h2>Your Details</h2>
+	
+		<form name="personalForm" id="personalForm" method="POST" action="/control/resPermStage4">
+	<div class="box-1 controlbody mrg-t5 ">
+		<div class="span250 div-left clear cnt-mrg">
+     		<select name="USER_TITLE" id="USER_TITLE" class="required" value="Title*">
+     			<option value="">Select Title</option>
+<option value="Mr">Mr</option>
+<option value="Mrs">Mrs</option>
+<option value="Ms">Ms</option>
+<option value="Dr">Dr</option>
+<option value="Mx">Mx</option>     		</select>
+   	 		<em class="clear" id="USER_TITLE_MSG" style="color:red"></em>
+		</div>
+
+			<div class="span250 div-left clear cnt-mrg">
+				<div class="label" >First name*  </div>
+         		<input type="text" name="USER_FIRST_NAME" id="USER_FIRST_NAME" class="required"   value=""  maxlength="20" onBlur="javascript:PCase('USER_FIRST_NAME',0);" />
+       	 		<em class="clear" id="USER_FIRST_NAME_MSG" style="color:red"></em>
+			</div>
+			<div class="span250 div-left clear cnt-mrg">
+				<div class="label">Last name* </div>
+        		<input type="text" name="USER_LAST_NAME" id="USER_LAST_NAME" class="required"  value=""   maxlength="20" onBlur="javascript:PCase('USER_LAST_NAME',0);"/>
+         		<em class="clear" id="USER_LAST_NAME_MSG" style="color:red"></em>
+			</div>
+			<div class="span250 div-left clear cnt-mrg">
+				<div class="label">Date of birth*</div>
+				<input type="text"  class="date required" name="USER_BIRTHDATE_PICKER" id="USER_BIRTHDATE_PICKER" placeholder="dd/mm/yyyy" applyPermitLambethstyle="cursor:pointer" />
+				<em class="clear" id="USER_BIRTHDATE_MSG" style="color:red"></em>
+				<em class="clear"> We need this to help us automatically confirm your identity and apply any age-related discounts to your purchase.</em>
+			</div>
+			
+			        
+		</div>
+		<div class="box-2 controlbody mrg-t5">		
+			<div class="span250 div-left clear cnt-mrg">
+				<div class="label">Main contact number*</div>
+				<input type="text" name="CUSTOMER_HOME_CONTACT" id="CUSTOMER_HOME_CONTACT" class="required" onkeypress="return blockSpecialChar(event)" value=""   maxlength="20"/>
+				<em class="clear" id="CUSTOMER_HOME_CONTACT_MSG" style="color:red"></em>
+			</div>
+			<div class="span250 div-left clear cnt-mrg">
+				<div class="label">Secondary contact number</div>
+				<input type="text" name="CUSTOMER_MOBILE_CONTACT" id="CUSTOMER_MOBILE_CONTACT" onkeypress="return blockSpecialChar(event)"  class="required"  value=""  maxlength="20" />
+				<em class="clear" id="CUSTOMER_MOBILE_CONTACT_MSG" style="color:red"></em>
+				<em class="clear" >&nbsp;</em>
+			</div>
+            
+			
+			
+			
+		</div>
+	</div>
+		<input type="hidden" name="USERNAME" id="USERNAME" value="">
+
+			<div class="div-left"><h2>Create an account</h2></div>
+		<div class="sec-5">
+			<div class="informational mrg-t15">	
+				<div class="warning">
+					Creating an account will let you easily renew your permit, buy vouchers and get reminders about when your permits are due to expire.
+				</div>
+			</div>
+			<div class="div-left controlbody">
+				<div class="box-1 bdr-none ">
+		            <p>Your email address is used to sign into your account and for us to let you know the status of your applications</p>
+				    <div class="span250 div-left clear cnt-mrg mrg-t15">
+				    	<div class="label">Email address*</div>
+						<input type="text" name="CUSTOMER_EMAIL" id="CUSTOMER_EMAIL" value="">
+						<em class="clear" id="CUSTOMER_EMAIL_MSG" style="color:red"></em>
+					</div>
+					<div class="span250 div-left clear cnt-mrg">
+						<div class="label">Confirm Email address*</div>
+						<input type="text" name="CUSTOMER_EMAIL_REPEAT" id="CUSTOMER_EMAIL_REPEAT" value="">
+						<em class="clear" id="CUSTOMER_EMAIL_REPEAT_MSG" style="color:red"></em>
+					</div>
+				</div>
+				<div class="box-2 bdr-none ">
+					<p>You must choose a password to protect your account. It must be at least 8 characters long and contain at least one number.</p>
+					<div class="span250 div-left clear cnt-mrg mrg-t15">
+					    <div class="label">Password*</div>
+	                    <input type="password" name="PASSWORD" id="PASSWORD" value="" maxlength="20">
+						<em class="clear" id="PASSWORD_MSG" style="color:red"></em>
+					</div>
+					<div class="span250 div-left clear cnt-mrg">
+						<div class="label">Confirm password*</div>
+	                    <input type="password" name="CONFIRM_PASSWORD" id="CONFIRM_PASSWORD" value="" maxlength="20">
+						<em class="clear" id="CONFIRM_PASSWORD_MSG" style="color:red"></em>
+					</div>					
+				</div>
+			</div>
+		</div>
+		<div class="span250 div-left clear cnt-mrg">
+			<a href="/control/forgotpasswordFormHackney" >I have forgotten my password</a>
+		</div>
+			<div class="informational mrg-t15">
+				<div class="warning">
+					<p class="mrg-t15">We will try to confirm that you live at the address stated in your application automatically. To do this we will check the details you supply against the council's customer database. If we have no record of you, we will pass this information to a credit reference agency, who will check the details you supply against databases they have access to. A record of the search will be retained but will not be visible to other parties and will not affect your credit record.</p>
+				</div>
+			</div>	
+        <input type="hidden" name="salesChannelEnumId" id="salesChannelEnumId" value="WEB_SALES_CHANNEL">
+		<input type="hidden" name="BLUE_BADGE_EXPIRY" id="BLUE_BADGE_EXPIRY">
+		<input type="hidden" name="USER_BIRTHDATE" id="USER_BIRTHDATE">
+		<input type="hidden" name="emailProductStoreId" value="9000"/>
+	</form>
+	<div class="loginDiv span600 ">
+	
+            <a href="javascript:void(0);" class="loginBtn" id="cfrmDetails" name="cfrmDetails">Continue to vehicle details</a>
+            <img class="ajaxloader" id="ajaxloaderContinue" style="display:none;" src="/images/ajax-loader.gif" />
+		
+		
+	</div>
+        <div class="text-21 hint-line mrg-t5 div-left span600"><span class="gray-c">3</span><span class="color-999">Vehicle details</span></div>	
+           <div class="text-21 hint-line mrg-t5 div-left span600"><span class="gray-c">4</span><span class="color-999">Duration and cost</span></div>
+
+<div class="text-21 hint-line mrg-t5 div-left span600"><span class="gray-c">6</span><span class="color-999">Terms and conditions</span></div>
+<div class="text-21 hint-line mrg-t5 div-left span600"><span class="gray-c">7</span><span class="color-999">Delivery options</span></div>
+<div class="text-21 hint-line mrg-t5 div-left span600"><span class="gray-c">8</span><span class="color-999">Payment</span></div><!-- End Template component://ecommerce/webapp/ecommerce/lambeth/resident/resPermitStage3.ftl -->
+</div><div id="customers" class="customers span100per">
+</div><div id="right-section" class="right-section">
+</div><div id="right-section" class="right-section landing">
+</div><div id="container" class="container">
+</div></div><div id="footer" class="footer-body">
+<!-- Begin Template component://ecommerce/webapp/ecommerce/includes/footerLambeth.ftl -->
+
+
+		<div class="footer">
+			<div class="text-center mrg-t10"><a href="https://hackney.gov.uk/parking-products-privacy" target="_blank" title="Find out about your Data Protection rights">Privacy Notice</a></div>
+		 </div> 
+<!-- End Template component://ecommerce/webapp/ecommerce/includes/footerLambeth.ftl -->
+</div><!-- Begin Template component://common/webcommon/includes/closehtmlbody.ftl -->
+</body>
+</html>
+<!-- End Template component://common/webcommon/includes/closehtmlbody.ftl -->
+<!-- End Section Widget  -->
+<!-- End Screen component://ecommerce/widget/CommonScreens.xml#main-decorator-lambeth -->
+<!-- End Screen component://ecommerce/widget/CommonScreens.xml#resPermStage3 -->
+
+result: error
