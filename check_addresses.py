@@ -83,7 +83,7 @@ def check_postcode(postcode):
 
   if addresses['numberOfResults'] < 1:
     print("Unknown postcode")
-    return 'unknown-postcode'
+    return {}
 
   results = []
   for address in addresslist:
@@ -107,6 +107,8 @@ def check_postcode(postcode):
       state = 'not-cpz'
     else:
       state = 'error'
+
+
 
     result = {
       'postcode': postcode,
